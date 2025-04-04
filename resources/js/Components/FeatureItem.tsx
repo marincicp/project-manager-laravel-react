@@ -2,6 +2,7 @@ import { Feature } from "@/types";
 import { VoteButton } from "./index";
 import { VoteBtnType } from "@/Enums/VoteBtnType";
 import { useState } from "react";
+import { Link } from "@inertiajs/react";
 
 export default function FeatureItem({ feature }: { feature: Feature }) {
     const [isExpanded, setIsExpended] = useState<boolean>(false);
@@ -16,20 +17,29 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
                     <VoteButton type={VoteBtnType.ArrowDown} />
                 </div>
                 <div className="flex-1">
-                    <h2 className="text-xl mb-2">{feature.name}</h2>
+                    <h2 className="text-xl mb-2 ">
+                        <Link href={route("feature.show", feature)}>
+                            {feature.name}
+                        </Link>
+                    </h2>
 
-                    <p className="">
-                        {isExpanded
-                            ? feature.description
-                            : feature.description.slice(0, 500) + "..."}
-                    </p>
+                    {feature.description && (
+                        <>
+                            <p className=" text-gray-400">
+                                {isExpanded
+                                    ? feature?.description
+                                    : feature?.description.slice(0, 500) +
+                                      "..."}
+                            </p>
 
-                    <button
-                        className="text-amber-500 hover:underline"
-                        onClick={() => setIsExpended((prev) => !prev)}
-                    >
-                        {isExpanded ? "Read Less" : "Read More"}
-                    </button>
+                            <button
+                                className="text-amber-500 hover:underline"
+                                onClick={() => setIsExpended((prev) => !prev)}
+                            >
+                                {isExpanded ? "Read Less" : "Read More"}
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
         </div>
