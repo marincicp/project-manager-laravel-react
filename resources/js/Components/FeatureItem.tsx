@@ -1,21 +1,34 @@
 import { Feature } from "@/types";
-import { VoteButton } from "./index";
-import { VoteBtnType } from "@/Enums/VoteBtnType";
+import { FeatureActionDropdown, FeatureUpvoteDownvote } from "./index";
+
 import { useState } from "react";
-import { Link } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 
 export default function FeatureItem({ feature }: { feature: Feature }) {
     const [isExpanded, setIsExpended] = useState<boolean>(false);
 
     return (
-        <div className="mb-4 overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
+        <div className="mb-4  bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
             <div className="p-6 text-gray-900 dark:text-gray-100 flex gap-8  transition-all duration-300">
-                <div className="flex flex-col items-center">
-                    <VoteButton type={VoteBtnType.ArrowUp} />
-                    <span>12</span>
+                {/* <div className="flex flex-col items-center">
+                    <VoteButton
+                        isDisabled={processing}
+                        onClick={() => handleUpvote(feature.id)}
+                        type={VoteBtnType.ArrowUp}
+                        isClicked={feature.user_has_upvoted}
+                    />
+                    <span>{feature.upvote_count}</span>
 
-                    <VoteButton type={VoteBtnType.ArrowDown} />
-                </div>
+                    <VoteButton
+                        isClicked={feature.user_has_downvoted}
+                        isDisabled={processing}
+                        onClick={() => handleUpvote(feature)}
+                        type={VoteBtnType.ArrowDown}
+                    />
+                </div> */}
+
+                <FeatureUpvoteDownvote feature={feature} />
+
                 <div className="flex-1">
                     <h2 className="text-xl mb-2 ">
                         <Link href={route("feature.show", feature)}>
@@ -40,6 +53,9 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
                             </button>
                         </>
                     )}
+                </div>
+                <div>
+                    <FeatureActionDropdown feature={feature} />
                 </div>
             </div>
         </div>
