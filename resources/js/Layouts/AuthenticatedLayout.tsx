@@ -2,6 +2,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import { PageProps, User } from "@/types";
 import { Link, usePage } from "@inertiajs/react";
 import { PropsWithChildren, ReactNode, useState } from "react";
 
@@ -9,8 +10,11 @@ export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-    const user = usePage().props.auth.user;
-    console.log(user, "user");
+    const {
+        auth: { user },
+        success,
+    } = usePage<PageProps>().props;
+
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -189,6 +193,12 @@ export default function Authenticated({
             )}
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    {success && (
+                        <div className="bg-emerald-500 py-4 px-6 rounded mb-8">
+                            {success}
+                        </div>
+                    )}
+
                     <main>{children}</main>
                 </div>
             </div>
