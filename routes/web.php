@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Feature;
+use App\Http\Controllers\UpvoteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +26,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+
+
+    Route::post("feature/{feature}/upvote}", [UpvoteController::class, "store"])->name("upvote.store");
+
+
+    Route::delete("feature/{feature}/upvote}", [UpvoteController::class, "destroy"])->name("upvote.destroy");
 
 
     Route::middleware("verified")->group(function () {
