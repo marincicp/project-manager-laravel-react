@@ -1,15 +1,29 @@
 import { VoteBtnType } from "@/Enums/VoteBtnType";
+import { Feature } from "@/types";
+import { useForm } from "@inertiajs/react";
 
-export default function VoteButton({ type }: { type: VoteBtnType }) {
+export default function VoteButton({
+    type,
+    isDisabled,
+    isClicked = false,
+    onClick,
+}: {
+    type: VoteBtnType;
+    isDisabled: boolean;
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
+    isClicked: boolean;
+}) {
+    const btnColor = isClicked ? "orange" : "currentColor";
+
     return (
-        <button>
+        <button disabled={isDisabled} onClick={onClick}>
             {type === VoteBtnType.ArrowUp ? (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
-                    stroke="currentColor"
+                    stroke={btnColor}
                     className="size-6"
                 >
                     <path
@@ -24,7 +38,7 @@ export default function VoteButton({ type }: { type: VoteBtnType }) {
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
-                    stroke="currentColor"
+                    stroke={btnColor}
                     className="size-6"
                 >
                     <path
