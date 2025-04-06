@@ -7,10 +7,16 @@ import InputError from "./InputError";
 import InputLabel from "./InputLabel";
 import TextAreaInput from "./TextAreaInput";
 import PrimaryButton from "./PrimaryButton";
+import Dropdown from "./Dropdown";
+import FeatureActionDropdown from "./FeatureActionDropdown";
+import FeatureUpvoteDownvote from "./FeatureUpvoteDownvote";
 
 export {
-    PrimaryButton,
     VoteButton,
+    FeatureUpvoteDownvote,
+    FeatureActionDropdown,
+    Dropdown,
+    PrimaryButton,
     TextAreaInput,
     AuthenticatedLayout,
     TextInput,
