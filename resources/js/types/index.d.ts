@@ -21,6 +21,9 @@ export type Feature = {
     description: string;
     name: string;
     user: User;
+    upvote_count: number;
+    user_has_upvoted: boolean;
+    user_has_downvoted: boolean;
 };
 
 export type PageProps<
@@ -30,4 +33,5 @@ export type PageProps<
         user: User;
     };
     ziggy: Config & { location: string };
+    success: string;
 };
