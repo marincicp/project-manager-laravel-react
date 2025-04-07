@@ -6,7 +6,7 @@ use App\Http\Resources\CommentResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FeatureResource extends JsonResource
+class FeatureListResource extends JsonResource
 {
 
     public static $wrap = false;
@@ -28,7 +28,6 @@ class FeatureResource extends JsonResource
             "upvote_count" => $this->upvote_count ?? 0,
             "user_has_upvoted" => (bool)$this->user_has_upvoted,
             "user_has_downvoted" => (bool) $this->user_has_downvoted,
-            "comments" =>  CommentResource::collection($this->comments),
         ];
     }
 }
