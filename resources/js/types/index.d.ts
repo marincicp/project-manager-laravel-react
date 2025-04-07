@@ -15,6 +15,13 @@ export type PaginatedData<T = any> = {
     // meta: object;
 };
 
+export type Comment = {
+    id: number;
+    created_at: string;
+    user: User;
+    comment: string;
+};
+
 export type Feature = {
     id: number;
     created_at: string;
@@ -24,6 +31,7 @@ export type Feature = {
     upvote_count: number;
     user_has_upvoted: boolean;
     user_has_downvoted: boolean;
+    comments: Comment[];
 };
 
 export type PageProps<
