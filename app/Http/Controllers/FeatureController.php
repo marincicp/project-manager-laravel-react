@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FeatureListResource;
 use App\Http\Resources\FeatureResource;
 use App\Models\Feature;
 use App\Http\Controllers\Controller;
@@ -25,7 +26,7 @@ class FeatureController extends Controller
             }
         ])->latest()->paginate(5);
 
-        return Inertia::render("Feature/Index", ["features" => FeatureResource::collection($features)]);
+        return Inertia::render("Feature/Index", ["features" => FeatureListResource::collection($features)]);
     }
 
     /**
@@ -62,7 +63,9 @@ class FeatureController extends Controller
      */
     public function show(Feature $feature): Response
     {
-        return Inertia::render("Feature/Show", ["feature" => new FeatureResource($feature->loadAuthUserVoteFeature()->loadFeatureUpvoteCount())]);
+        $feature = $feature->load("comments.user")->loadAuthUserVoteFeature()->loadFeatureUpvoteCount();
+
+        return Inertia::render("Feature/Show", ["feature" => new FeatureResource($feature)]);
     }
 
     /**
@@ -72,7 +75,9 @@ class FeatureController extends Controller
      */
     public function edit(Feature $feature): Response
     {
-        return Inertia::render("Feature/Edit", ["feature" => new FeatureResource($feature->loadAuthUserVoteFeature())]);
+        $feature->load("comments.user")->loadAuthUserVoteFeature();
+
+        return Inertia::render("Feature/Edit", ["feature" => new FeatureResource($feature)]);
     }
 
     /**

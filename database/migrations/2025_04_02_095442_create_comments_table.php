@@ -17,16 +17,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Feature::class)->constrained()->cascadeOnDelete();
+            $table->morphs("commentable");
             $table->string("comment", 2000);
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('comments');
     }
 };

@@ -1,9 +1,16 @@
-import { AuthenticatedLayout, FeatureUpvoteDownvote } from "@/Components";
+import {
+    AuthenticatedLayout,
+    Divider,
+    FeatureUpvoteDownvote,
+    NewCommentForm,
+} from "@/Components";
+import CommentItem from "@/Components/CommentItem";
 import { Feature } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 
 export default function Show({ feature }: { feature: Feature }) {
     const audio = new Audio();
+
     return (
         <AuthenticatedLayout
             header={
@@ -41,6 +48,21 @@ export default function Show({ feature }: { feature: Feature }) {
                         </h2>
                         <p>Feature description:</p>
                         <p className="text-gray-400">{feature.description}</p>
+                        <Divider />
+                        <div className="mt-2">
+                            <NewCommentForm feature={feature} />
+                        </div>
+
+                        <Divider />
+
+                        <div>
+                            {feature.comments.map((comment) => (
+                                <CommentItem
+                                    key={comment.id}
+                                    comment={comment}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

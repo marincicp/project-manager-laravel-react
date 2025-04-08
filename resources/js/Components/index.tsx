@@ -1,7 +1,5 @@
 import VoteButton from "./VoteButton";
-
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-
 import TextInput from "./TextInput";
 import InputError from "./InputError";
 import InputLabel from "./InputLabel";
@@ -10,8 +8,13 @@ import PrimaryButton from "./PrimaryButton";
 import Dropdown from "./Dropdown";
 import FeatureActionDropdown from "./FeatureActionDropdown";
 import FeatureUpvoteDownvote from "./FeatureUpvoteDownvote";
-
+import NewCommentForm from "./NewCommentForm";
+import Divider from "./Divider";
+import CommentItem from "./CommentItem";
 export {
+    CommentItem,
+    Divider,
+    NewCommentForm,
     VoteButton,
     FeatureUpvoteDownvote,
     FeatureActionDropdown,
