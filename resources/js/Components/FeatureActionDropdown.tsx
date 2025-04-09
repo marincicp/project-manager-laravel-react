@@ -1,11 +1,15 @@
 import { Feature } from "@/types";
 import { Dropdown } from "./index";
+import { can } from "@/helpers";
+import { UserPermission } from "@/Enums/UserPermissions";
 
 export default function FeatureActionDropdown({
     feature,
 }: {
     feature: Feature;
 }) {
+    if (!can(UserPermission.MANAGE_FEATURES)) return null;
+
     return (
         <Dropdown>
             <Dropdown.Trigger>

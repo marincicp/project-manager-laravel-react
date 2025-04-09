@@ -3,6 +3,8 @@ import PrimaryButton from "./PrimaryButton";
 import { useForm } from "@inertiajs/react";
 import InputError from "./InputError";
 import TextAreaInput from "./TextAreaInput";
+import { can } from "@/helpers";
+import { UserPermission } from "@/Enums/UserPermissions";
 
 export default function NewCommentForm({ feature }: { feature: Feature }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -19,10 +21,12 @@ export default function NewCommentForm({ feature }: { feature: Feature }) {
         });
     }
 
+    if (!can(UserPermission.MANAGE_COMMENTS)) return null;
+
     return (
         <form
             onSubmit={handleSubmit}
-            className="flex justify-start gap-2 justify-center flex-col"
+            className="flex justify-start gap-2  flex-col"
         >
             <div className="flex w-full gap-2">
                 <TextAreaInput

@@ -50,10 +50,18 @@ class DatabaseSeeder extends Seeder
             'name' => 'Commenter User',
             'email' => 'com@example.com',
         ])->assignRole(RolesEnum::Commenter);
-
-        User::factory()->has(Feature::factory()->count(50), "features")->create([
+        User::factory()->create([
+            'name' => 'Commenter User1',
+            'email' => 'com1@example.com',
+        ])->assignRole(RolesEnum::Commenter);
+        User::factory()->has(Feature::factory()->count(5), "features")->create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
+        ])->assignRole(RolesEnum::Admin);
+
+        User::factory()->has(Feature::factory()->count(5), "features")->create([
+            'name' => 'Admin User1',
+            'email' => 'admin1@example.com',
         ])->assignRole(RolesEnum::Admin);
     }
 }
