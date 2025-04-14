@@ -2,6 +2,8 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import { UserPermission } from "@/Enums/UserPermissions";
+import { can } from "@/helpers";
 import { PageProps, User } from "@/types";
 import { Link, usePage } from "@inertiajs/react";
 import { PropsWithChildren, ReactNode, useState } from "react";
@@ -47,6 +49,16 @@ export default function Authenticated({
                                     Feature
                                 </NavLink>
                             </div>
+                            {can(UserPermission.MANAGE_USERS) && (
+                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    <NavLink
+                                        href={route("user.index")}
+                                        active={route().current("user.index")}
+                                    >
+                                        Users
+                                    </NavLink>
+                                </div>
+                            )}
                         </div>
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
