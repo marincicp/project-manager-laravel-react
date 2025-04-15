@@ -4,6 +4,7 @@ export interface User {
     id: number;
     name: string;
     email: string;
+    created_at: string;
     email_verified_at?: string;
     permissions?: string[];
     roles?: string[];
@@ -32,6 +33,14 @@ export type Feature = {
     user_has_upvoted: boolean;
     user_has_downvoted: boolean;
     comments: Comment[];
+};
+
+export type Role = {
+    created_at: string;
+    guard_name: string;
+    id: number;
+    name: string;
+    updated_at: string;
 };
 
 export type PageProps<

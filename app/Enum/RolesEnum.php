@@ -13,7 +13,7 @@ enum RolesEnum: string
         return [
             self::Admin->value => "Admin",
             self::User->value => "User",
-            self::Commenter => "Commenter"
+            self::Commenter->value => "Commenter",
         ];
     }
 
@@ -22,7 +22,7 @@ enum RolesEnum: string
         return match ($this) {
             self::Admin->value => "Admin",
             self::User->value => "User",
-            self::Commenter => "Commenter"
+            self::Commenter->value => "Commenter"
         };
     }
 }
