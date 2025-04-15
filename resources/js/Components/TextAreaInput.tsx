@@ -8,12 +8,15 @@ import {
 
 export default forwardRef(function TextInput(
     {
-        rows = 6,
+        rows,
         type = "text",
         className = "",
         isFocused = false,
         ...props
-    }: InputHTMLAttributes<HTMLTextAreaElement> & { isFocused?: boolean },
+    }: InputHTMLAttributes<HTMLTextAreaElement> & {
+        isFocused?: boolean;
+        rows: number;
+    },
     ref
 ) {
     const localRef = useRef<HTMLTextAreaElement>(null);
