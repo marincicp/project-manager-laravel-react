@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Http\Controllers\Controller;
+use App\Enum\RolesEnum;
 use App\Http\Resources\AuthUserResource;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\RoleResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -16,9 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with("permissions")->get();
+        $users = User::with('permissions')->get();
 
-        return Inertia::render("User/Index", ["users" => AuthUserResource::collection($users)]);
+        return Inertia::render('User/Index', ['users' => AuthUserResource::collection($users)]);
     }
 
     /**
@@ -26,7 +27,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return Inertia::render("User/Edit", ["user" => $user]);
+
+
+        $roles = Role::all();
+
+        return Inertia::render('User/Edit', ['user' => new AuthUserResource($user), "roles" =>  $roles, "roleLabels" => RolesEnum::labels()]);
     }
 
     /**
@@ -34,6 +39,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $data = $request->validate(["roles" => ["array", "required"]]);
+
+        $user->syncRoles(...$data["roles"]);
+
+        return back()->with("success", "Role update successfully");
     }
 }
