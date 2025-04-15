@@ -19,3 +19,12 @@ export function hasRole(role: string) {
 export function canManageComments(commentOwner: User) {
     return hasRole(UserRoles.ADMIN) || commentOwner.id === getAuthUser().id;
 }
+
+export function formatDate(dateStr: string) {
+    const date = new Date(dateStr);
+    const day = date.getDay();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+
+    return `${month}/${day}/${year}`;
+}
