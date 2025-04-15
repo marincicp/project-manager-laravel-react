@@ -2,13 +2,11 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\CommentResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class FeatureListResource extends JsonResource
 {
-
     public static $wrap = false;
 
     /**
@@ -26,7 +24,7 @@ class FeatureListResource extends JsonResource
             "description" => $this->description,
             "user" => new UserResource($this->user),
             "upvote_count" => $this->upvote_count ?? 0,
-            "user_has_upvoted" => (bool)$this->user_has_upvoted,
+            "user_has_upvoted" => (bool) $this->user_has_upvoted,
             "user_has_downvoted" => (bool) $this->user_has_downvoted,
         ];
     }

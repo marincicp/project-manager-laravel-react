@@ -9,7 +9,6 @@ class AuthUserResource extends JsonResource
 {
     public static $wrap = false;
 
-
     /**
      * Transform the resource into an array.
      *

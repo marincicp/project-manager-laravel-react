@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Feature;
 use Illuminate\Http\RedirectResponse;
@@ -11,12 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class FeatureCommentController extends Controller
 {
-
     /**
      * Store a newly created feature comment in the database
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Feature $feature
-     * @return RedirectResponse
      */
     public function store(Request $request, Feature $feature): RedirectResponse
     {
@@ -29,9 +24,6 @@ class FeatureCommentController extends Controller
 
     /**
      * Handle the incoming request to delete a feature's comment in the database
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Comment $comment
-     * @return RedirectResponse
      */
     public function destroy(Request $request, Comment $comment): RedirectResponse
     {

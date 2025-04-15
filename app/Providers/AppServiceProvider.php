@@ -28,8 +28,6 @@ class AppServiceProvider extends ServiceProvider
         Model::shouldBeStrict();
         Vite::prefetch(concurrency: 3);
 
-
-
         Gate::policy(Comment::class, FeatureCommentPolicy::class);
     }
 }

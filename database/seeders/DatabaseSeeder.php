@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-
         $userRole = Role::create(["name" => RolesEnum::User->value]);
         $adminRole = Role::create(["name" => RolesEnum::Admin->value]);
         $commenterRole = Role::create(["name" => RolesEnum::Commenter->value]);
@@ -35,16 +34,13 @@ class DatabaseSeeder extends Seeder
             $manageCommentersPermission,
             $manageUsersPermission,
             $manageFeaturesPermission,
-            $upvoteDownvotesPermission
+            $upvoteDownvotesPermission,
         ]);
-
-
 
         User::factory()->create([
             'name' => 'User User',
             'email' => 'user@example.com',
         ])->assignRole(RolesEnum::User);
-
 
         User::factory()->create([
             'name' => 'Commenter User',

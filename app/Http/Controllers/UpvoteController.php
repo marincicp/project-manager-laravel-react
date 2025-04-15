@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Feature;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -10,12 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UpvoteController extends Controller
 {
-
     /**
      * Store or update a user's vote (upvote or downvote) on a feature
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Feature $feature
-     * @return RedirectResponse
      */
     public function store(Request $request, Feature $feature): RedirectResponse
     {
@@ -26,18 +21,15 @@ class UpvoteController extends Controller
                 "user_id" => Auth::user()->id,
             ],
             [
-                "upvote" => $data["upvote"]
+                "upvote" => $data["upvote"],
             ]
         );
 
-        return  back();
+        return back();
     }
-
 
     /**
      * Remove the authenticated user's vote from a comment
-     * @param \App\Models\Feature $feature
-     * @return RedirectResponse
      */
     public function destroy(Feature $feature): RedirectResponse
     {
