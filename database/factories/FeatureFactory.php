@@ -18,8 +18,8 @@ class FeatureFactory extends Factory
     {
 
         return [
-            "name" => fake()->text(),
-            "description" => fake()->text(20000),
+            'name' => fake()->text(),
+            'description' => fake()->text(20000),
         ];
     }
 }

@@ -15,11 +15,11 @@ class FeatureCommentController extends Controller
      */
     public function store(Request $request, Feature $feature): RedirectResponse
     {
-        $data = $request->validate(["comment" => ["required", "min:3", "max:300", "string"]]);
+        $data = $request->validate(['comment' => ['required', 'min:3', 'max:300', 'string']]);
 
-        $feature->comments()->create(["user_id" => Auth::user()->id, "comment" => $data["comment"]]);
+        $feature->comments()->create(['user_id' => Auth::user()->id, 'comment' => $data['comment']]);
 
-        return back()->with("success", "Comment created successfully!");
+        return back()->with('success', 'Comment created successfully!');
     }
 
     /**
@@ -29,6 +29,6 @@ class FeatureCommentController extends Controller
     {
         $comment->delete();
 
-        return back()->with("success", "Comment deleted successfully.");
+        return back()->with('success', 'Comment deleted successfully.');
     }
 }

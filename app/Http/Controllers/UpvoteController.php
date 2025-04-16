@@ -14,14 +14,14 @@ class UpvoteController extends Controller
      */
     public function store(Request $request, Feature $feature): RedirectResponse
     {
-        $data = $request->validate(["feature_id" => "required", "exist:features,id", "upvote" => ["required", "boolean"]]);
+        $data = $request->validate(['feature_id' => 'required', 'exist:features,id', 'upvote' => ['required', 'boolean']]);
 
         $feature->upvotes()->updateOrCreate(
             [
-                "user_id" => Auth::user()->id,
+                'user_id' => Auth::user()->id,
             ],
             [
-                "upvote" => $data["upvote"],
+                'upvote' => $data['upvote'],
             ]
         );
 
@@ -33,7 +33,7 @@ class UpvoteController extends Controller
      */
     public function destroy(Feature $feature): RedirectResponse
     {
-        $feature->upvotes()->where("user_id", Auth::user()->id)->delete();
+        $feature->upvotes()->where('user_id', Auth::user()->id)->delete();
 
         return back();
     }

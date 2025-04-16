@@ -19,8 +19,7 @@ export default function Index({
                 </h2>
             }
         >
-            <Head title="Dashboard" />
-
+            <Head title="Features" />
             {can(UserPermission.MANAGE_FEATURES) && (
                 <div className="mb-8">
                     <Link

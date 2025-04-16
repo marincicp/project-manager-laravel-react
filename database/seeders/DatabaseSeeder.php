@@ -19,14 +19,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $userRole = Role::create(["name" => RolesEnum::User->value]);
-        $adminRole = Role::create(["name" => RolesEnum::Admin->value]);
-        $commenterRole = Role::create(["name" => RolesEnum::Commenter->value]);
+        $userRole = Role::create(['name' => RolesEnum::User->value]);
+        $adminRole = Role::create(['name' => RolesEnum::Admin->value]);
+        $commenterRole = Role::create(['name' => RolesEnum::Commenter->value]);
 
-        $manageFeaturesPermission = Permission::create(["name" => PermissionEnum::ManageFeatures->value]);
-        $manageUsersPermission = Permission::create(["name" => PermissionEnum::ManageUsers->value]);
-        $manageCommentersPermission = Permission::create(["name" => PermissionEnum::ManageComments->value]);
-        $upvoteDownvotesPermission = Permission::create(["name" => PermissionEnum::UpvoteDownvote->value]);
+        $manageFeaturesPermission = Permission::create(['name' => PermissionEnum::ManageFeatures->value]);
+        $manageUsersPermission = Permission::create(['name' => PermissionEnum::ManageUsers->value]);
+        $manageCommentersPermission = Permission::create(['name' => PermissionEnum::ManageComments->value]);
+        $upvoteDownvotesPermission = Permission::create(['name' => PermissionEnum::UpvoteDownvote->value]);
 
         $userRole->syncPermissions([$upvoteDownvotesPermission]);
         $commenterRole->syncPermissions([$upvoteDownvotesPermission, $manageCommentersPermission]);
@@ -50,12 +50,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Commenter User1',
             'email' => 'com1@example.com',
         ])->assignRole(RolesEnum::Commenter);
-        User::factory()->has(Feature::factory()->count(5), "features")->create([
+        User::factory()->has(Feature::factory()->count(5), 'features')->create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
         ])->assignRole(RolesEnum::Admin);
 
-        User::factory()->has(Feature::factory()->count(5), "features")->create([
+        User::factory()->has(Feature::factory()->count(5), 'features')->create([
             'name' => 'Admin User1',
             'email' => 'admin1@example.com',
         ])->assignRole(RolesEnum::Admin);

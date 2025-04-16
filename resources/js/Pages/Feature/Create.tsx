@@ -10,7 +10,7 @@ import FeatureItem from "@/Components/FeatureItem";
 import { Feature, PaginatedData } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
 
-export default function Create({ feature }: { feature: Feature }) {
+export default function Create() {
     const { data, setData, processing, errors, post } = useForm({
         name: "",
         description: "",

@@ -31,13 +31,12 @@ export default function Login({
     return (
         <GuestLayout>
             <Head title="Log in" />
-
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
                     {status}
                 </div>
             )}
-
+            admin1@example.com -- password
             <form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
