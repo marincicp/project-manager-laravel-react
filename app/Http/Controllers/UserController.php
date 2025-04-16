@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Enum\RolesEnum;
 use App\Http\Resources\AuthUserResource;
-use App\Http\Resources\RoleResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -28,10 +27,9 @@ class UserController extends Controller
     public function edit(User $user)
     {
 
-
         $roles = Role::all();
 
-        return Inertia::render('User/Edit', ['user' => new AuthUserResource($user), "roles" =>  $roles, "roleLabels" => RolesEnum::labels()]);
+        return Inertia::render('User/Edit', ['user' => new AuthUserResource($user), 'roles' => $roles, 'roleLabels' => RolesEnum::labels()]);
     }
 
     /**
@@ -39,10 +37,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $data = $request->validate(["roles" => ["array", "required"]]);
+        $data = $request->validate(['roles' => ['array', 'required']]);
 
-        $user->syncRoles(...$data["roles"]);
+        $user->syncRoles(...$data['roles']);
 
-        return back()->with("success", "Role update successfully");
+        return back()->with('success', 'Role update successfully');
     }
 }

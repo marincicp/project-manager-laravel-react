@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Comment extends Model
 {
-    protected $fillable = ["user_id", "comment"];
+    protected $fillable = ['user_id', 'comment'];
 
     /**
      * Get the parent commentable model (project or feature)

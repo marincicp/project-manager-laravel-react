@@ -7,8 +7,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommentResource extends JsonResource
 {
-
     public static $wrap = false;
+
     /**
      * Transform the resource into an array.
      *
@@ -16,11 +16,11 @@ class CommentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return  [
-            "id" => $this->id,
-            "comment" => $this->comment,
-            "created_at" => $this->created_at->format("Y-m-d H:i:s"),
-            "user" => new UserResource($this->user),
+        return [
+            'id' => $this->id,
+            'comment' => $this->comment,
+            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+            'user' => new UserResource($this->user),
         ];
     }
 }

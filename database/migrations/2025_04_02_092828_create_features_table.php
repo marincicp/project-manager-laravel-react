@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('features', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string("name");
-            $table->longText("description")->nullable();
+            $table->string('name');
+            $table->longText('description')->nullable();
             $table->foreignIdFor(User::class);
         });
     }
