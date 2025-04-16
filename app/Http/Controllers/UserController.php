@@ -18,7 +18,8 @@ class UserController extends Controller
     {
         $users = User::with('permissions')->get();
 
-        return Inertia::render('User/Index', ['users' => AuthUserResource::collection($users)]);
+
+        return Inertia::render('User/Index', ['users' => AuthUserResource::collection($users), 'roleLabels' => RolesEnum::labels()]);
     }
 
     /**

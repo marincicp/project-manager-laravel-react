@@ -7,7 +7,7 @@ export interface User {
     created_at: string;
     email_verified_at?: string;
     permissions?: string[];
-    roles?: string[];
+    roles: string[];
 }
 
 export type PaginatedData<T = any> = {

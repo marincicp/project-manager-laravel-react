@@ -6,7 +6,6 @@ import {
     Radio,
     TextInput,
 } from "@/Components";
-import Checkbox from "@/Components/Checkbox";
 import { Role, User } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
 
@@ -29,7 +28,7 @@ export default function Edit({
 
         put(route("user.update", user.id), { preserveScroll: true });
     }
-    function handleOnRoleChange(e) {
+    function handleOnRoleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const roleName = e.target.value;
 
         setData("roles", [roleName]);

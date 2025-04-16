@@ -11,12 +11,14 @@ import FeatureUpvoteDownvote from "./FeatureUpvoteDownvote";
 import NewCommentForm from "./NewCommentForm";
 import Divider from "./Divider";
 import CommentItem from "./CommentItem";
-import { Table } from "./Table";
+import UsersTable from "./UsersTable";
+import UsersTableRow from "./UsersTableRow";
 import Radio from "./Radio";
 
 export {
     Radio,
-    Table,
+    UsersTableRow,
+    UsersTable,
     CommentItem,
     Divider,
     NewCommentForm,
