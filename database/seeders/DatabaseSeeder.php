@@ -8,6 +8,7 @@ use App\Models\Feature;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -59,5 +60,15 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin User1',
             'email' => 'admin1@example.com',
         ])->assignRole(RolesEnum::Admin);
+
+
+        $projectStatus = [
+            ["name" => "Not started"],
+            ["name" => "In progress"],
+            ["name" => "Completed"],
+            ["name" => "Inactive"],
+        ];
+
+        DB::table("project_status")->insert($projectStatus);
     }
 }
