@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enum\PermissionEnum;
 use App\Enum\RolesEnum;
 use App\Models\Feature;
+use App\Models\Project;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -37,7 +38,14 @@ class DatabaseSeeder extends Seeder
             $manageFeaturesPermission,
             $upvoteDownvotesPermission,
         ]);
+        $projectStatus = [
+            ["name" => "Not started"],
+            ["name" => "In progress"],
+            ["name" => "Completed"],
+            ["name" => "Inactive"],
+        ];
 
+        DB::table("project_statuses")->insert($projectStatus);
         User::factory()->create([
             'name' => 'User User',
             'email' => 'user@example.com',
@@ -51,24 +59,58 @@ class DatabaseSeeder extends Seeder
             'name' => 'Commenter User1',
             'email' => 'com1@example.com',
         ])->assignRole(RolesEnum::Commenter);
-        User::factory()->has(Feature::factory()->count(5), 'features')->create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-        ])->assignRole(RolesEnum::Admin);
+        // User::factory()->has(Feature::factory()->count(5), 'features')->create([
+        //     'name' => 'Admin User',
+        //     'email' => 'admin@example.com',
+        // ])->assignRole(RolesEnum::Admin);
 
-        User::factory()->has(Feature::factory()->count(5), 'features')->create([
-            'name' => 'Admin User1',
-            'email' => 'admin1@example.com',
-        ])->assignRole(RolesEnum::Admin);
+        // $admin =  User::factory()->has(Project::factory(4)->state(function (array $attributes, User $user) {
+        //     return ["created_by" => $user->id];
+        // })->hasAttached(Feature::factory(5)->state(function (array $attributes, Project $project) {
+        //     return ["user_id" => $project->created_by];
+        // }), "features"), "projects")->create([
+        //     'name' => 'Admin User',
+        //     'email' => 'admin@example.com',
+        // ])->assignRole(RolesEnum::Admin);
 
+        User::factory()
+            ->has(
+                Project::factory()
+                    ->count(5)
+                    ->has(
+                        Feature::factory(5)->state(function (array $attributes, Project $project) {
+                            return [
+                                'user_id' => $project->created_by,
+                            ];
+                        }),
+                        'features'
+                    ),
+                'projects'
+            )
+            ->create([
+                'name' => 'Admin User',
+                'email' => 'admin@example.com',
+            ])
+            ->assignRole(RolesEnum::Admin);
 
-        $projectStatus = [
-            ["name" => "Not started"],
-            ["name" => "In progress"],
-            ["name" => "Completed"],
-            ["name" => "Inactive"],
-        ];
-
-        DB::table("project_status")->insert($projectStatus);
+        User::factory()
+            ->has(
+                Project::factory()
+                    ->count(5)
+                    ->has(
+                        Feature::factory(5)->state(function (array $attributes, Project $project) {
+                            return [
+                                'user_id' => $project->created_by,
+                            ];
+                        }),
+                        'features'
+                    ),
+                'projects'
+            )
+            ->create([
+                'name' => 'Admin User1',
+                'email' => 'admin1@example.com',
+            ])
+            ->assignRole(RolesEnum::Admin);
     }
 }
