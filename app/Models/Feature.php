@@ -32,6 +32,12 @@ class Feature extends Model
         return $this->hasMany(Upvote::class);
     }
 
+    public function project(): BelongsTo
+    {
+
+        return $this->belongsTo(Project::class);
+    }
+
     /**
      * Scope a query to include whether the authenticated user has upvoted or downvoted each feature
      *   Adds two boolean fields:
