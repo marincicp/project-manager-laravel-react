@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string("name");
-            $table->foreignIdFor(User::class, "created_by");
+            $table->foreignIdFor(User::class,);
             $table->longText("description")->nullable();
             $table->foreignId("status_id")->default(1)->constrained("project_statuses");
             $table->datetime("start_date")->nullable();
