@@ -14,8 +14,12 @@ import CommentItem from "./CommentItem";
 import UsersTable from "./UsersTable";
 import UsersTableRow from "./UsersTableRow";
 import Radio from "./Radio";
+import ProjectItem from "./ProjectItem";
+import StatusLabel from "./StatusLabel";
 
 export {
+    StatusLabel,
+    ProjectItem,
     Radio,
     UsersTableRow,
     UsersTable,

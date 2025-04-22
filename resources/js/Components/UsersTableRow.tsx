@@ -9,7 +9,6 @@ export default function UsersTableRow({
     user: User;
     roleLabels: Record<string, string>;
 }) {
-    console.log(user);
     return (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
             <th
