@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
                     ->has(
                         Feature::factory(5)->state(function (array $attributes, Project $project) {
                             return [
-                                'user_id' => $project->created_by,
+                                'user_id' => $project->user_id,
                             ];
                         }),
                         'features'
@@ -100,7 +100,7 @@ class DatabaseSeeder extends Seeder
                     ->has(
                         Feature::factory(5)->state(function (array $attributes, Project $project) {
                             return [
-                                'user_id' => $project->created_by,
+                                'user_id' => $project->user_id,
                             ];
                         }),
                         'features'
