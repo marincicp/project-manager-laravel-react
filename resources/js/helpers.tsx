@@ -28,3 +28,12 @@ export function formatDate(dateStr: string) {
 
     return `${month}/${day}/${year}`;
 }
+
+export function formatInputDate(dateStr: string) {
+    const date = new Date(dateStr);
+    const day = date.getDay();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+
+    return `${year}-${month}-${day}`;
+}

@@ -35,6 +35,22 @@ export type Feature = {
     comments: Comment[];
 };
 
+export type Project = {
+    id: number;
+    name: string;
+    description: string;
+    user: User;
+    user_id: string;
+    due_date?: string;
+    start_date?: string;
+    status: ProjectStatus;
+};
+
+export type ProjectStatus = {
+    id: number;
+    name: string;
+};
+
 export type Role = {
     created_at: string;
     guard_name: string;
