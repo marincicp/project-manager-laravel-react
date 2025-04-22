@@ -14,7 +14,7 @@ class Project extends Model
 
 
 
-    protected  $fillable  = ['created_by', 'status_id', 'name', 'description', 'start_date', 'due_date'];
+    protected  $fillable  = ['user_id', 'status_id', 'name', 'description', 'start_date', 'due_date'];
 
 
 
@@ -29,8 +29,8 @@ class Project extends Model
         return $this->hasMany(Feature::class);
     }
 
-    public function status(): HasOne
+    public function status(): BelongsTo
     {
-        return $this->hasOne(ProjectStatus::class);
+        return $this->belongsTo(ProjectStatus::class);
     }
 }
