@@ -29,10 +29,11 @@ class ProjectStoreRequest extends FormRequest
                 "required",
                 "min:3",
                 "max:100",
+                "unique:projects,name"
             ],
             "description" => ["nullable", "string", "min:5", "max:2000"],
-            "start_date" => ["required", Rule::date()->after(today())],
-            "due_date" => ["required"],
+            "start_date" => ["nullable", "date", Rule::date()->after(today())],
+            "due_date" => ["nullable", "date"],
         ];
 
         if ($this->get("start_date")) {
