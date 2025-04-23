@@ -6,7 +6,11 @@ import TextAreaInput from "./TextAreaInput";
 import { can } from "@/helpers";
 import { UserPermission } from "@/Enums/UserPermissions";
 
-export default function NewCommentForm({ feature }: { feature: Feature }) {
+export default function NewCommentFeatureForm({
+    feature,
+}: {
+    feature: Feature;
+}) {
     const { data, setData, post, processing, errors } = useForm({
         comment: "",
     });

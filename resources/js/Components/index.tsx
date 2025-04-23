@@ -8,7 +8,7 @@ import PrimaryButton from "./PrimaryButton";
 import Dropdown from "./Dropdown";
 import FeatureActionDropdown from "./FeatureActionDropdown";
 import FeatureUpvoteDownvote from "./FeatureUpvoteDownvote";
-import NewCommentForm from "./NewCommentForm";
+import NewCommentFeatureForm from "./NewCommentFeatureForm";
 import Divider from "./Divider";
 import CommentItem from "./CommentItem";
 import UsersTable from "./UsersTable";
@@ -25,7 +25,7 @@ export {
     UsersTable,
     CommentItem,
     Divider,
-    NewCommentForm,
+    NewCommentFeatureForm,
     VoteButton,
     FeatureUpvoteDownvote,
     FeatureActionDropdown,
