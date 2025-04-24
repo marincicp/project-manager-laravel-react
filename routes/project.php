@@ -11,4 +11,7 @@ Route::middleware(["auth", "verified"])->group(function () {
 
 
    Route::post("/project/{project}/comment", [ProjectCommentController::class, "store"])->middleware('can:' . PermissionEnum::ManageComments->value)->name("projectComment.store");
+
+
+   Route::delete("/project/{comment}", [ProjectCommentController::class, "destroy"])->can("delete", "comment")->middleware('can:' . PermissionEnum::ManageComments->value)->name("projectComment.destroy");
 });
