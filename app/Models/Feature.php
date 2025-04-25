@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Feature extends Model
 {
@@ -63,6 +64,18 @@ class Feature extends Model
 
         ]);
     }
+
+
+    public function scopeWithUpvoteCount(Builder $query): Builder
+    {
+        return $query->addSelect([
+            'upvote_count' => DB::table('upvotes')
+                ->selectRaw("SUM(CASE WHEN upvote = 1 THEN 1 ELSE -1 END)")
+                ->whereColumn('features.id', 'upvotes.feature_id')
+        ]);
+    }
+
+
 
     /**
      *  Load whether the authenticated user has upvoted or downvoted feature

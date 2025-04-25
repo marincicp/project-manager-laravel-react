@@ -26,7 +26,8 @@ class ProjectResource extends JsonResource
             "start_date"  => $this->start_date,
             "due_date"  => $this->due_date,
             "user" => new UserResource($this->user),
-            "status" => new ProjectStatusResource($this->status)
+            "status" => new ProjectStatusResource($this->status),
+            "comments" => CommentResource::collection($this->comments)
         ];
     }
 }

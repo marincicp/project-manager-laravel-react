@@ -19,11 +19,8 @@ class FeatureController extends Controller
      */
     public function index(): Response
     {
-        $features = Feature::with(['user'])->withAuthUserUpvotes()->withCount([
-            'upvotes as upvote_count' => function ($query) {
-                $query->where('upvote', true);
-            },
-        ])->latest()->paginate(5);
+        $features = Feature::with('user')->withUpvoteCount()->withAuthUserUpvotes()->latest()->paginate(10);
+
 
         return Inertia::render('Feature/Index', ['features' => FeatureListResource::collection($features)]);
     }
@@ -59,8 +56,7 @@ class FeatureController extends Controller
     public function show(Feature $feature): Response
     {
         $feature = $feature->load('comments.user')->loadAuthUserVoteFeature()->loadFeatureUpvoteCount();
-
-        return Inertia::render('Feature/Show', ['feature' => new FeatureResource($feature), 'comments' => Inertia::defer(fn () => CommentResource::collection($feature->comments()))]);
+        return Inertia::render('Feature/Show', ['feature' => new FeatureResource($feature), 'comments' => Inertia::defer(fn() => CommentResource::collection($feature->comments))]);
     }
 
     /**

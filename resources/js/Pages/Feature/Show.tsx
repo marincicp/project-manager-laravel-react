@@ -2,7 +2,7 @@ import {
     AuthenticatedLayout,
     Divider,
     FeatureUpvoteDownvote,
-    NewCommentForm,
+    NewCommentFeatureForm,
 } from "@/Components";
 import CommentItem from "@/Components/CommentItem";
 import { UserPermission } from "@/Enums/UserPermissions";
@@ -54,7 +54,7 @@ export default function Show({ feature }: { feature: Feature }) {
                         <p className="text-gray-400">{feature.description}</p>
                         <Divider />
                         <div className="mt-2">
-                            <NewCommentForm feature={feature} />
+                            <NewCommentFeatureForm feature={feature} />
                         </div>
 
                         <Divider />
