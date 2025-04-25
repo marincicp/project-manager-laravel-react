@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectStoreRequest;
 use App\Http\Requests\ProjectUpdateRequest;
+use App\Http\Resources\FeatureResource;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\ProjectStatusResource;
 use App\Models\Project;
@@ -25,7 +26,9 @@ class ProjectController extends Controller
      */
     public function index(): Response
     {
-        $projects = Project::with(["user", "status"])->latest()->paginate(15);
+        $projects = Project::with(["user", "status", "comments.user"])->latest()->paginate(15);
+
+
         return Inertia::render("Project/Index", ["projects" => ProjectResource::collection($projects)]);
     }
 
@@ -34,8 +37,11 @@ class ProjectController extends Controller
      */
     public function show(Project $project): Response
     {
-        $project->load(["user", "status"]);
-        return Inertia::render("Project/Show", ["project" => new ProjectResource($project)]);
+        $project->load(relations: ["user", "status", "comments.user",  "features" => function ($query) {
+            $query->with(["user", "comments"])->withUpvoteCount()->withAuthUserUpvotes();
+        }]);
+
+        return Inertia::render("Project/Show", ["project" => new ProjectResource($project), "features" => FeatureResource::collection($project->features)]);
     }
 
     /**
