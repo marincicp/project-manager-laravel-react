@@ -20,16 +20,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([RolesAndPermissionSeeder::class]);
+        $this->call([RolesAndPermissionSeeder::class, ProjectStatusesSeeder::class]);
 
-        $projectStatus = [
-            ["name" => "Not started"],
-            ["name" => "In progress"],
-            ["name" => "Completed"],
-            ["name" => "Inactive"],
-        ];
 
-        DB::table("project_statuses")->insert($projectStatus);
         User::factory()->create([
             'name' => 'User User',
             'email' => 'user@example.com',
