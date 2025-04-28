@@ -3,19 +3,25 @@ import {
     InputError,
     InputLabel,
     PrimaryButton,
+    StatusLabel,
     TextAreaInput,
     TextInput,
 } from "@/Components";
 import FeatureItem from "@/Components/FeatureItem";
-import { Feature, PaginatedData } from "@/types";
+import { Feature, PaginatedData, Project, ProjectDropdown } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
 
-export default function Create() {
+export default function Create({
+    projects,
+}: {
+    projects: { data: ProjectDropdown[] };
+}) {
     const { data, setData, processing, errors, post } = useForm({
         name: "",
         description: "",
+        project_id: "",
     });
-
+    console.log(projects);
     function handleCreateFeature(e: React.FormEvent<Element>) {
         e.preventDefault();
 
@@ -74,6 +80,31 @@ export default function Create() {
 
                             <InputError
                                 message={errors.description}
+                                className="mt-2"
+                            />
+                        </div>
+
+                        <div className="mb-8 flex flex-col">
+                            <label htmlFor="status">Select project</label>
+                            <select
+                                onChange={(e) =>
+                                    setData("project_id", e.target.value)
+                                }
+                                id="status"
+                                name="status"
+                                className={
+                                    "rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600 mt-2"
+                                }
+                            >
+                                <option value="">Select a project...</option>
+                                {projects.data.map((project) => (
+                                    <option key={project.id} value={project.id}>
+                                        {project.name} ({project.status})
+                                    </option>
+                                ))}
+                            </select>
+                            <InputError
+                                message={errors.project_id}
                                 className="mt-2"
                             />
                         </div>

@@ -46,6 +46,12 @@ export type Project = {
     status: ProjectStatus;
 };
 
+export type ProjectDropdown = {
+    id: number;
+    name: string;
+    status: string;
+};
+
 export type ProjectStatus = {
     id: number;
     name: string;
