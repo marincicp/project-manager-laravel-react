@@ -15,7 +15,7 @@ class Feature extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'user_id'];
+    protected $fillable = ['name', 'description', 'user_id', 'project_id'];
 
     public function user(): BelongsTo
     {

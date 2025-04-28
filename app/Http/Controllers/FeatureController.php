@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\ProjectStatusEnum;
+use App\Http\Requests\FeatureStoreRequest;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\FeatureListResource;
 use App\Http\Resources\FeatureResource;
+use App\Http\Resources\ProjectDropdownResource;
 use App\Models\Feature;
+use App\Models\Project;
+use App\Models\ProjectStatus;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,19 +35,19 @@ class FeatureController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Feature/Create');
+        $projects =  Project::with('status:id,name')->whereHas("status", function ($query) {
+            $query->whereIn('name', [ProjectStatusEnum::InProgress->value, ProjectStatusEnum::NotStarted->value]);
+        })->get();
+
+        return Inertia::render('Feature/Create', ['projects' => ProjectDropdownResource::collection($projects)]);
     }
 
     /**
      * Store a newly created feature in the database
      */
-    public function store(Request $request): RedirectResponse
+    public function store(FeatureStoreRequest $request): RedirectResponse
     {
-        $data = $request->validate([
-            'name' => ['string', 'min:5', 'max:500', 'required'],
-            'description' => ['nullable', 'string'],
-        ]);
-
+        $data = $request->validated();
         $data['user_id'] = Auth::user()->id;
 
         Feature::create($data);
@@ -55,6 +60,7 @@ class FeatureController extends Controller
      */
     public function show(Feature $feature): Response
     {
+
         $feature = $feature->load('comments.user')->loadAuthUserVoteFeature()->loadFeatureUpvoteCount();
         return Inertia::render('Feature/Show', ['feature' => new FeatureResource($feature), 'comments' => Inertia::defer(fn() => CommentResource::collection($feature->comments))]);
     }
