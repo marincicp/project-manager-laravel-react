@@ -61,7 +61,7 @@ class FeatureController extends Controller
     public function show(Feature $feature): Response
     {
 
-        $feature = $feature->load('comments.user')->loadAuthUserVoteFeature()->loadFeatureUpvoteCount();
+        $feature = $feature->load(['comments.user', 'project.status'])->loadAuthUserVoteFeature()->loadFeatureUpvoteCount();
         return Inertia::render('Feature/Show', ['feature' => new FeatureResource($feature), 'comments' => Inertia::defer(fn() => CommentResource::collection($feature->comments))]);
     }
 

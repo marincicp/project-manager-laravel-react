@@ -50,7 +50,9 @@ export default function Show({ feature }: { feature: Feature }) {
                         <h2 className="text-xl mb-2 text-gray-400">
                             {feature.name}
                         </h2>
-                        <p>Feature description:</p>
+                        <p>Project:</p>
+                        <p className="text-gray-400">{feature.project.name}</p>
+                        <p className="mt-2">Feature description:</p>
                         <p className="text-gray-400">{feature.description}</p>
                         <Divider />
                         <div className="mt-2">

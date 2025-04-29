@@ -27,6 +27,7 @@ class FeatureResource extends JsonResource
             'user_has_upvoted' => (bool) $this->user_has_upvoted,
             'user_has_downvoted' => (bool) $this->user_has_downvoted,
             'comments' => CommentResource::collection($this->comments),
+            'project' => new ProjectDropdownResource($this->project)
         ];
     }
 }
