@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Feature } from "@/types";
-import { FeatureActionDropdown, FeatureUpvoteDownvote } from "./index";
+import {
+    FeatureActionDropdown,
+    FeatureUpvoteDownvote,
+    StatusLabel,
+} from "./index";
 import { Link } from "@inertiajs/react";
 
 export default function FeatureItem({
@@ -48,6 +52,11 @@ export default function FeatureItem({
                             </p>
                         ))}
 
+                    <div className="mt-2">
+                        <p className=" text-gray-400">
+                            Project name: {feature.project.name}
+                        </p>
+                    </div>
                     <div className="p-2">
                         <Link
                             className="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900 dark:bg-gray-600 dark:text-gray-800 dark:hover:bg-white dark:focus:bg-white dark:focus:ring-offset-gray-800 dark:active:bg-gray-300"

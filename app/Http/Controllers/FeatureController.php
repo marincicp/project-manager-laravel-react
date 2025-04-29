@@ -24,7 +24,7 @@ class FeatureController extends Controller
      */
     public function index(): Response
     {
-        $features = Feature::with('user')->withUpvoteCount()->withAuthUserUpvotes()->latest()->paginate(10);
+        $features = Feature::with(['user', 'project.status'])->withUpvoteCount()->withAuthUserUpvotes()->latest()->paginate(10);
 
 
         return Inertia::render('Feature/Index', ['features' => FeatureListResource::collection($features)]);
