@@ -14,8 +14,8 @@ export default forwardRef(function TextInput(
         isFocused = false,
         ...props
     }: InputHTMLAttributes<HTMLTextAreaElement> & {
-        isFocused?: boolean;
         rows: number;
+        isFocused?: boolean;
     },
     ref
 ) {

@@ -28,7 +28,7 @@ class ProjectUpdateRequest extends FormRequest
                 "required",
                 "min:3",
                 "max:100",
-                "unique:projects,name"
+                "unique:projects,name," . $this->id
             ],
             "description" => ["nullable", "string", "min:5", "max:2000"],
             "start_date" => ["nullable", "date", Rule::date()->after(today())],
