@@ -9,7 +9,6 @@ class ProjectDropdownResource extends JsonResource
 {
     public static $wrap = false;
 
-
     /**
      * Transform the resource into an array.
      *
@@ -20,7 +19,7 @@ class ProjectDropdownResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            "status" => $this->status->name
+            'status' => $this->status->name,
         ];
     }
 }

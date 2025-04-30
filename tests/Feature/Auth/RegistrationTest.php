@@ -30,7 +30,6 @@ test('new users can register', function () {
         $upvoteDownvotesPermission,
     ]);
 
-
     $response = $this->post('/register', [
         'name' => 'Test User',
         'email' => 'tesqt@example.com',

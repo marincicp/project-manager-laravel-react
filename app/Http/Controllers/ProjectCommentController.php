@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Project;
 use Illuminate\Http\RedirectResponse;
@@ -11,19 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectCommentController extends Controller
 {
-
-
-
     /**
      * Store the newly added project comment in the database
      */
     public function store(Request $request, Project $project): RedirectResponse
     {
-        $data = $request->validate(["comment" => ["required", "string", "min:3", "max:200"]]);
+        $data = $request->validate(['comment' => ['required', 'string', 'min:3', 'max:200']]);
 
-        $project->comments()->create(["user_id" => Auth::user()->id, "comment" => $data["comment"]]);
+        $project->comments()->create(['user_id' => Auth::user()->id, 'comment' => $data['comment']]);
 
-        return back()->with("success", "Comment created successfully");
+        return back()->with('success', 'Comment created successfully');
     }
 
     /**
@@ -33,6 +29,6 @@ class ProjectCommentController extends Controller
     {
         $comment->delete();
 
-        return back()->with("success", "Comment successfully deleted");
+        return back()->with('success', 'Comment successfully deleted');
     }
 }

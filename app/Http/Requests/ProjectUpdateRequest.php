@@ -22,23 +22,22 @@ class ProjectUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules =  [
-            "name" => [
-                "string",
-                "required",
-                "min:3",
-                "max:100",
-                "unique:projects,name," . $this->id
+        $rules = [
+            'name' => [
+                'string',
+                'required',
+                'min:3',
+                'max:100',
+                'unique:projects,name,'.$this->id,
             ],
-            "description" => ["nullable", "string", "min:5", "max:2000"],
-            "start_date" => ["nullable", "date", Rule::date()->after(today())],
-            "due_date" => ["nullable", "date"],
-            "status_id" => ["exists:project_statuses,id"]
+            'description' => ['nullable', 'string', 'min:5', 'max:2000'],
+            'start_date' => ['nullable', 'date', Rule::date()->after(today())],
+            'due_date' => ['nullable', 'date'],
+            'status_id' => ['exists:project_statuses,id'],
         ];
 
-
-        if ($this->get("start_date")) {
-            $rules['due_date'][] = Rule::date()->after($this->get("start_date"));
+        if ($this->get('start_date')) {
+            $rules['due_date'][] = Rule::date()->after($this->get('start_date'));
         }
 
         return $rules;

@@ -26,7 +26,7 @@ class FeatureListResource extends JsonResource
             'upvote_count' => $this->upvote_count ?? 0,
             'user_has_upvoted' => (bool) $this->user_has_upvoted,
             'user_has_downvoted' => (bool) $this->user_has_downvoted,
-            "project" => new ProjectDropdownResource($this->project)
+            'project' => new ProjectDropdownResource($this->project),
         ];
     }
 }

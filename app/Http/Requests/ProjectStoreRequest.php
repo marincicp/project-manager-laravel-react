@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -23,21 +22,21 @@ class ProjectStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules =  [
-            "name" => [
-                "string",
-                "required",
-                "min:3",
-                "max:100",
-                "unique:projects,name"
+        $rules = [
+            'name' => [
+                'string',
+                'required',
+                'min:3',
+                'max:100',
+                'unique:projects,name',
             ],
-            "description" => ["nullable", "string", "min:5", "max:2000"],
-            "start_date" => ["nullable", "date", Rule::date()->after(today())],
-            "due_date" => ["nullable", "date"],
+            'description' => ['nullable', 'string', 'min:5', 'max:2000'],
+            'start_date' => ['nullable', 'date', Rule::date()->after(today())],
+            'due_date' => ['nullable', 'date'],
         ];
 
-        if ($this->get("start_date")) {
-            $rules['due_date'][] = Rule::date()->after($this->get("start_date"));
+        if ($this->get('start_date')) {
+            $rules['due_date'][] = Rule::date()->after($this->get('start_date'));
         }
 
         return $rules;

@@ -2,16 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Enum\PermissionEnum;
 use App\Enum\RolesEnum;
 use App\Models\Feature;
 use App\Models\Project;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,7 +17,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([RolesAndPermissionSeeder::class, ProjectStatusesSeeder::class]);
-
 
         User::factory()->create([
             'name' => 'User User',
@@ -36,7 +31,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Commenter User1',
             'email' => 'com1@example.com',
         ])->assignRole(RolesEnum::Commenter);
-
 
         // User::factory()->has(Feature::factory()->count(5), 'features')->create([
         //     'name' => 'Admin User',

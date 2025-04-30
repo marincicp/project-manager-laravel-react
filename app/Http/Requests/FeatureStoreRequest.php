@@ -24,7 +24,7 @@ class FeatureStoreRequest extends FormRequest
         return [
             'name' => ['string', 'min:5', 'max:500', 'required'],
             'description' => ['nullable', 'string'],
-            "project_id" => ["required", "exists:projects,id"]
+            'project_id' => ['required', 'exists:projects,id'],
         ];
     }
 }

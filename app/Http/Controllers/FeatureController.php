@@ -10,7 +10,6 @@ use App\Http\Resources\FeatureResource;
 use App\Http\Resources\ProjectDropdownResource;
 use App\Models\Feature;
 use App\Models\Project;
-use App\Models\ProjectStatus;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +25,6 @@ class FeatureController extends Controller
     {
         $features = Feature::with(['user', 'project.status'])->withUpvoteCount()->withAuthUserUpvotes()->latest()->paginate(10);
 
-
         return Inertia::render('Feature/Index', ['features' => FeatureListResource::collection($features)]);
     }
 
@@ -35,7 +33,7 @@ class FeatureController extends Controller
      */
     public function create(): Response
     {
-        $projects =  Project::with('status:id,name')->whereHas("status", function ($query) {
+        $projects = Project::with('status:id,name')->whereHas('status', function ($query) {
             $query->whereIn('name', [ProjectStatusEnum::InProgress->value, ProjectStatusEnum::NotStarted->value]);
         })->get();
 
@@ -62,7 +60,8 @@ class FeatureController extends Controller
     {
 
         $feature = $feature->load(['comments.user', 'project.status'])->loadAuthUserVoteFeature()->loadFeatureUpvoteCount();
-        return Inertia::render('Feature/Show', ['feature' => new FeatureResource($feature), 'comments' => Inertia::defer(fn() => CommentResource::collection($feature->comments))]);
+
+        return Inertia::render('Feature/Show', ['feature' => new FeatureResource($feature), 'comments' => Inertia::defer(fn () => CommentResource::collection($feature->comments))]);
     }
 
     /**

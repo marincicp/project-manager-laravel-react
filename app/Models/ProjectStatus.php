@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProjectStatus extends Model
 {
-
-
-
     public function project(): HasMany
     {
 

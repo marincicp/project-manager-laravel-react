@@ -9,17 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectRepository
 {
+    public static function create(array $data)
+    {
+        $status = ProjectStatus::where('name', ProjectStatusEnum::NotStarted->value)->firstOrFail();
 
+        $data['status_id'] = $status->id;
+        $data['user_id'] = Auth::user()->id;
 
-   public static function create(array $data)
-   {
-      $status = ProjectStatus::where("name", ProjectStatusEnum::NotStarted->value)->firstOrFail();
+        $project = Project::create($data);
 
-      $data["status_id"] = $status->id;
-      $data["user_id"] = Auth::user()->id;
-
-      $project = Project::create($data);
-
-      return $project;
-   }
+        return $project;
+    }
 }

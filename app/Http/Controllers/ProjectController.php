@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectStoreRequest;
 use App\Http\Requests\ProjectUpdateRequest;
 use App\Http\Resources\FeatureResource;
@@ -17,19 +16,16 @@ use Inertia\Response;
 
 class ProjectController extends Controller
 {
-
-
-    public function __construct(private ProjectRepository  $projectRepo) {}
+    public function __construct(private ProjectRepository $projectRepo) {}
 
     /**
      * Show a list of all projects
      */
     public function index(): Response
     {
-        $projects = Project::with(["user", "status", "comments.user"])->latest()->paginate(15);
+        $projects = Project::with(['user', 'status', 'comments.user'])->latest()->paginate(15);
 
-
-        return Inertia::render("Project/Index", ["projects" => ProjectResource::collection($projects)]);
+        return Inertia::render('Project/Index', ['projects' => ProjectResource::collection($projects)]);
     }
 
     /**
@@ -37,11 +33,11 @@ class ProjectController extends Controller
      */
     public function show(Project $project): Response
     {
-        $project->load(relations: ["user", "status", "comments.user",  "features" => function ($query) {
-            $query->with(["user", "comments"])->withUpvoteCount()->withAuthUserUpvotes();
+        $project->load(relations: ['user', 'status', 'comments.user',  'features' => function ($query) {
+            $query->with(['user', 'comments'])->withUpvoteCount()->withAuthUserUpvotes();
         }]);
 
-        return Inertia::render("Project/Show", ["project" => new ProjectResource($project), "features" => FeatureResource::collection($project->features)]);
+        return Inertia::render('Project/Show', ['project' => new ProjectResource($project), 'features' => FeatureResource::collection($project->features)]);
     }
 
     /**
@@ -51,9 +47,8 @@ class ProjectController extends Controller
     {
         $statuses = ProjectStatusResource::collection(ProjectStatus::all());
 
-        return Inertia::render("Project/Edit", ["project" => new ProjectResource($project), "statuses" => $statuses]);
+        return Inertia::render('Project/Edit', ['project' => new ProjectResource($project), 'statuses' => $statuses]);
     }
-
 
     /**
      * Handle the request to update a project in the database
@@ -64,22 +59,19 @@ class ProjectController extends Controller
 
         $project->update($data);
 
-        return to_route("project.show", $project)->with("success", "Project updated successfully");
+        return to_route('project.show', $project)->with('success', 'Project updated successfully');
     }
-
 
     /**
      * Show the create project page
      */
     public function create(): Response
     {
-        return Inertia::render("Project/Create");
+        return Inertia::render('Project/Create');
     }
-
 
     /**
      * Store newly created project in the database
-     * @param \App\Http\Requests\ProjectStoreRequest $request
      */
     public function store(ProjectStoreRequest $request): RedirectResponse
     {
@@ -87,7 +79,7 @@ class ProjectController extends Controller
 
         $this->projectRepo->create($data);
 
-        return to_route("project.index")->with("success", "Project has been successfully created");
+        return to_route('project.index')->with('success', 'Project has been successfully created');
     }
 
     /**
@@ -98,6 +90,6 @@ class ProjectController extends Controller
 
         $project->delete();
 
-        return to_route("project.index")->with("success", "Project successfully deleted");
+        return to_route('project.index')->with('success', 'Project successfully deleted');
     }
 }

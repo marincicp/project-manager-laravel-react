@@ -15,13 +15,13 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string("name");
-            $table->foreignIdFor(User::class,);
-            $table->longText("description")->nullable();
-            $table->foreignId("status_id")->default(1)->constrained("project_statuses");
-            $table->datetime("start_date")->nullable();
-            $table->datetime("completed_at")->nullable();
-            $table->datetime("due_date")->nullable();
+            $table->string('name');
+            $table->foreignIdFor(User::class);
+            $table->longText('description')->nullable();
+            $table->foreignId('status_id')->default(1)->constrained('project_statuses');
+            $table->datetime('start_date')->nullable();
+            $table->datetime('completed_at')->nullable();
+            $table->datetime('due_date')->nullable();
         });
     }
 };

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Enum\PermissionEnum;
 use App\Enum\RolesEnum;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
