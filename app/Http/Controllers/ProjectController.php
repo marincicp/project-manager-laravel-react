@@ -33,7 +33,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project): Response
     {
-        $project->load(relations: ['user', 'status', 'comments.user',  'features' => function ($query) {
+        $project->load(relations: ['user', 'status', 'comments.user', 'features.project', 'features' => function ($query) {
             $query->with(['user', 'comments'])->withUpvoteCount()->withAuthUserUpvotes();
         }]);
 

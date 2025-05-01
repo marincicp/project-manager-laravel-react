@@ -28,23 +28,32 @@ export default function FeatureItem({
                     </h2>
 
                     <div className="mt-2">
-                        <p className=" text-gray-400">
-                            Project name: {feature.project.name}
-                        </p>
+                        <div>
+                            <p className=" text-gray-400"> Project name:</p>{" "}
+                            <p className="text-white">
+                                {" "}
+                                {feature.project.name}
+                            </p>
+                        </div>
                     </div>
                     {feature.description &&
                         (feature.description.length > 200 ? (
                             <>
-                                <p className="text-gray-400">
-                                    Description:{" "}
-                                    {isExpanded
-                                        ? feature?.description
-                                        : feature?.description.slice(0, 500) +
-                                          "..."}
-                                </p>
+                                <div className="text-gray-400 mt-2">
+                                    <p> Description: </p>
+
+                                    <p className="text-white">
+                                        {isExpanded
+                                            ? feature?.description
+                                            : feature?.description.slice(
+                                                  0,
+                                                  500
+                                              ) + "..."}
+                                    </p>
+                                </div>
 
                                 <button
-                                    className="text-amber-500 hover:underline"
+                                    className="text-amber-500 hover:underline mt-2"
                                     onClick={() =>
                                         setIsExpended((prev) => !prev)
                                     }
@@ -53,9 +62,12 @@ export default function FeatureItem({
                                 </button>
                             </>
                         ) : (
-                            <p className=" text-gray-400">
-                                Description: {feature.description}
-                            </p>
+                            <div>
+                                <p className=" text-gray-400">Description:</p>{" "}
+                                <p className="text-white">
+                                    {feature.description}
+                                </p>
+                            </div>
                         ))}
 
                     <div className="p-2">
