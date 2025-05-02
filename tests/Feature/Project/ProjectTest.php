@@ -80,3 +80,24 @@ test('can not be created without name field', function () {
         ]
     )->assertSessionHasErrors('name');
 });
+test('can not be created with start date in the past', function () {
+
+    $this->seed([RolesAndPermissionSeeder::class, ProjectStatusesSeeder::class]);
+
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+    $user->assignRole(RolesEnum::Admin->value);
+
+    $this->actingAs($user)->get(route('project.create'))->assertStatus(200);
+
+    $res = $this->actingAs($user)->post(
+        '/project',
+        [
+            'name' => 'new project',
+            'description' => 'some description',
+            'start_date' => now()->addDays(-2),
+            'due_date' => '',
+        ]
+    )->assertSessionHasErrors('start_date');
+});
