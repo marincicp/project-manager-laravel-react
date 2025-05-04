@@ -128,3 +128,31 @@ test('cannot be created with a due date before the start date', function () {
         ]
     )->assertSessionHasErrors('due_date');
 });
+
+
+test('can be created with only a due date', function () {
+
+    $this->seed([RolesAndPermissionSeeder::class, ProjectStatusesSeeder::class]);
+
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+    $user->assignRole(RolesEnum::Admin->value);
+
+    $this->actingAs($user)->get(route('project.create'))->assertStatus(200);
+
+    $res = $this->actingAs($user)->post(
+        '/project',
+        [
+            'name' => 'new project 2',
+            'description' => 'some description',
+            'start_date' => "",
+            'due_date' => now()->addDays(2),
+        ]
+    );
+
+    $res->assertRedirect(route('project.index'));
+    $this->assertDatabaseHas('projects', [
+        'name' => 'new project 2',
+    ]);
+});
