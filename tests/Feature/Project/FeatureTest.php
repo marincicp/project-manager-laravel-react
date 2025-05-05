@@ -36,3 +36,27 @@ test('can be created by admin role', function () {
       'name' => 'Feature x',
    ]);
 });
+
+
+test('can not be created by user and commenter role', function () {
+   $this->seed([RolesAndPermissionSeeder::class, ProjectStatusesSeeder::class]);
+
+   $roles = [RolesEnum::User->value, RolesEnum::Commenter->value];
+
+   foreach ($roles as $role) {
+      $user = User::factory()->create(['email_verified_at' => now()]);
+      $user->assignRole($role);
+
+      $this->actingAs($user)
+         ->get(route('feature.create'))
+         ->assertForbidden();
+
+      $this->actingAs($user)
+         ->post('/feature', [
+            'name' => 'new name',
+            'description' => 'some description',
+            'user_id' => 1,
+         ])
+         ->assertForbidden();
+   }
+});
