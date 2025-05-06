@@ -81,7 +81,6 @@ test('can not be created without name field', function () {
     )->assertSessionHasErrors('name');
 });
 
-
 test('can not be created with start date in the past', function () {
 
     $this->seed([RolesAndPermissionSeeder::class, ProjectStatusesSeeder::class]);
@@ -103,9 +102,6 @@ test('can not be created with start date in the past', function () {
         ]
     )->assertSessionHasErrors('start_date');
 });
-
-
-
 
 test('cannot be created with a due date before the start date', function () {
 
@@ -129,7 +125,6 @@ test('cannot be created with a due date before the start date', function () {
     )->assertSessionHasErrors('due_date');
 });
 
-
 test('can be created with only a due date', function () {
 
     $this->seed([RolesAndPermissionSeeder::class, ProjectStatusesSeeder::class]);
@@ -146,7 +141,7 @@ test('can be created with only a due date', function () {
         [
             'name' => 'new project 2',
             'description' => 'some description',
-            'start_date' => "",
+            'start_date' => '',
             'due_date' => now()->addDays(2),
         ]
     );
